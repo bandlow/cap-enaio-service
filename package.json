@@ -1,0 +1,54 @@
+{
+  "name": "enaio-service",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "type": "module",
+  "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^4.3.1",
+    "@sap-cloud-sdk/util": "^4.3.1",
+    "@sap-cloud-sdk/http-client": "^4.3.1",
+    "@sap/cds": "^9",
+    "express": "^4",
+    "form-data": "^4.0.5"
+  },
+  "devDependencies": {
+    "@cap-js/cds-test": "^0.4.1",
+    "@cap-js/sqlite": "^2",
+    "@sap/eslint-plugin-cds": "^4",
+    "eslint": "^9",
+    "mbt": "^1.2.34",
+    "typedoc": "^0.25.0"
+  },
+  
+"engines": {
+    "node": "^20"
+  },
+  "scripts": {
+    "start": "cds-serve --port ${PORT} --profile production",
+    "docs": "typedoc --entryPoint srv/*.js --out docs/api"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "enaioRest": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "enaio"
+        }
+      },
+      "Enaio_direct": {
+        "kind": "rest",
+        "credentials": {
+          "url": "https://enaiotest.skf.net/osrest/api/serviceinfo"
+        },
+        "[test]": {
+          "credentials": {
+            "url": "https://enaiotest.skf.net/osrest/api/serviceinfo",
+            "username": "bg4674",
+            "password": "optimal"
+          }
+        }
+      }
+    }
+  }
+}

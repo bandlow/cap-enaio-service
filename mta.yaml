@@ -1,0 +1,66 @@
+_schema-version: '3.1'
+ID: enaio-service
+description: 'CAP service to connect to Enaio REST API via Cloud Connector'
+version: 1.0.0
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci --omit=dev
+        - npx cds build --production
+modules:
+
+  # --------------------------
+  # Backend / CAP Service
+  # --------------------------
+  - name: enaio-service-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+    build-parameters:
+      builder: npm-ci
+      ignore:
+        - "default-env.json"
+        - ".env"
+        - "node_modules/"
+        - "mta_archives"
+      # oder wenn du pnpm nutzt:
+      # buildpack: nodejs_buildpack
+    requires:
+      - name: enaio-destination-svc
+      - name: enaio-connectivity-svc
+      - name: enaio-xsuaa-svc
+
+resources:
+
+  # --------------------------
+  # Destination Service
+  # --------------------------
+  - name: enaio-destination-svc
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  # --------------------------
+  # Connectivity Service
+  # --------------------------
+  - name: enaio-connectivity-svc
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+
+  # --------------------------
+  # XSUAA Service
+  # --------------------------
+  - name: enaio-xsuaa-svc
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json

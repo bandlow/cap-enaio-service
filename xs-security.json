@@ -1,0 +1,25 @@
+{
+  "xsappname": "enaio-cap",
+  "tenant-mode": "shared",
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://oauth.pstmn.io/v1/callback"
+    ]
+  },
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "Zugriff auf Enaio Service Info"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "DisplayRole",
+      "description": "Rolle zum Lesen des Enaio Service",
+      "scope-references": [
+        "$XSAPPNAME.Display"
+      ]
+    }
+  ],
+  "authorities": []
+}

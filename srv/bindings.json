@@ -1,0 +1,51 @@
+Getting key enaio-dest-key for service instance enaio as karsten.bandlow@skf.com...
+
+{
+  "credentials": {
+    "clientid": "sb-clonef26cb6f914984982a4e16aca7e95ab1e!b575766|destination-xsappname!b62",
+    "clientsecret": "65bef3b0-d699-4895-8800-e34e3070a115$M09x33AE6o_OnGNXt0X-4QWRxzlHE6cR3iX1NSRIy8w=",
+    "credential-type": "binding-secret",
+    "identityzone": "shipmanager",
+    "instanceid": "f26cb6f9-1498-4982-a4e1-6aca7e95ab1e",
+    "tenantid": "eceb17c3-0855-4ce7-a92a-d3cee439dcfe",
+    "tenantmode": "dedicated",
+    "token-type": [
+      "xsuaa"
+    ],
+    "uaadomain": "authentication.us10.hana.ondemand.com",
+    "uri": "https://destination-configuration.cfapps.us10.hana.ondemand.com",
+    "url": "https://shipmanager.authentication.us10.hana.ondemand.com",
+    "verificationkey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAozUPGcClY9jhJGcaf7BY\ntrio5NGmfmWsMHFtaFMxlr3tWpsS3sYkP9GxapjW3wR4gXCzyUVIMBBmaWLZG/ak\nWqtwR1synLBDsSBND0C6Ne6d55/enc6HnD8METwvZ1EgPmabVezGZhl5MlsyBckU\nEXJHmBp1z/BxeyNLQAaFbTCqt1TW9J9lNRLxlyREezEerczalKyOhX4lZs8/QLsu\nz+mm7RxgROp0W7Op/QbRuTf9QeW3PmFd4Bekwit+Rx6j9mXqKTZ5MTbtfDipyyRb\n5MY403AMtxSltyJUrPQZJf10Zy5snpBhscSfB9ZSofm2/cc+MuQI+gj66L5tVRfG\nJQIDAQAB\n-----END PUBLIC KEY-----",
+    "xsappname": "clonef26cb6f914984982a4e16aca7e95ab1e!b575766|destination-xsappname!b62"
+  }
+}
+
+Getting key enaio-conn-key for service instance enaio-connectivity as karsten.bandlow@skf.com...
+
+{
+  "credentials": {
+    "clientid": "sb-clone8e61ac7bf20648e6bc88cf7a7b9d54f9!b575766|connectivity!b23892",
+    "clientsecret": "91b03245-0c42-4ac5-a9cf-85689389d56d$sPOtp1TcI_MvSd2qiF1cH4A_7FOvPM8dni7xdpSzNV8=",
+    "credential-type": "binding-secret",
+    "identityzone": "shipmanager",
+    "onpremise_proxy_host": "connectivityproxy.internal.cf.us10-001.hana.ondemand.com",
+    "onpremise_proxy_http_port": "20003",
+    "onpremise_proxy_ldap_port": "20001",
+    "onpremise_proxy_port": "20003",
+    "onpremise_proxy_rfc_port": "20001",
+    "onpremise_socks5_proxy_port": "20004",
+    "region_configuration_id": "cf-us10-001",
+    "tenantid": "eceb17c3-0855-4ce7-a92a-d3cee439dcfe",
+    "tenantmode": "dedicated",
+    "token-type": [
+      "xsuaa"
+    ],
+    "token_service_domain": "authentication.us10.hana.ondemand.com",
+    "token_service_url": "https://shipmanager.authentication.us10.hana.ondemand.com",
+    "uaadomain": "authentication.us10.hana.ondemand.com",
+    "url": "https://shipmanager.authentication.us10.hana.ondemand.com",
+    "verificationkey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAozUPGcClY9jhJGcaf7BY\ntrio5NGmfmWsMHFtaFMxlr3tWpsS3sYkP9GxapjW3wR4gXCzyUVIMBBmaWLZG/ak\nWqtwR1synLBDsSBND0C6Ne6d55/enc6HnD8METwvZ1EgPmabVezGZhl5MlsyBckU\nEXJHmBp1z/BxeyNLQAaFbTCqt1TW9J9lNRLxlyREezEerczalKyOhX4lZs8/QLsu\nz+mm7RxgROp0W7Op/QbRuTf9QeW3PmFd4Bekwit+Rx6j9mXqKTZ5MTbtfDipyyRb\n5MY403AMtxSltyJUrPQZJf10Zy5snpBhscSfB9ZSofm2/cc+MuQI+gj66L5tVRfG\nJQIDAQAB\n-----END PUBLIC KEY-----",
+    "xsappname": "clone8e61ac7bf20648e6bc88cf7a7b9d54f9!b575766|connectivity!b23892"
+  }
+}
+
