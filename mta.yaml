@@ -9,7 +9,7 @@ build-parameters:
     - builder: custom
       commands:
         - npm ci --omit=dev
-        - npx cds build --production
+        - cds build --production
 modules:
 
   # --------------------------
@@ -18,9 +18,15 @@ modules:
   - name: enaio-service-srv
     type: nodejs
     path: gen/srv
+    properties:
+      # IDProve Credentials - direkte Werte (überschreibbar via mtaext)
+      ENAIO_DESTINATION: "enaio-test"
+      # CDS Logging
+      CDS_LOG_LEVEL: "debug"
+      CDS_LOG_LEVELS_ENAIO_SERVICE: "debug"   # enaio-service → ENAIO_SERVICE
     parameters:
       buildpack: nodejs_buildpack
-      memory: 256M
+      memory: 128M
     build-parameters:
       builder: npm-ci
       ignore:

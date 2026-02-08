@@ -10,7 +10,7 @@ export default cds.service.impl(async function () {
   this.on('PingOnPrem', async (req) => {
     try {
       const destination = await getDestination({
-        destinationName: 'enaio-destination',
+        destinationName: 'enaio-test',
         useCache: false
       });
 
@@ -55,7 +55,7 @@ export default cds.service.impl(async function () {
   this.on('ServiceInfo', async (req) => {
     try {
       const destination = await getDestination({
-        destinationName: 'enaio-destination',
+        destinationName: 'enaio-test',
         useCache: false
       });
 
