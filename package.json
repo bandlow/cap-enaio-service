@@ -5,26 +5,26 @@
   "type": "module",
   "dependencies": {
     "@sap-cloud-sdk/connectivity": "^4.3.1",
-    "@sap-cloud-sdk/util": "^4.3.1",
     "@sap-cloud-sdk/http-client": "^4.3.1",
-    "@sap/cds": "^9",
+    "@sap-cloud-sdk/util": "^4.3.1",
     "express": "^4",
     "form-data": "^4.0.5"
   },
   "devDependencies": {
     "@cap-js/cds-test": "^0.4.1",
     "@cap-js/sqlite": "^2",
+    "@sap/cds": "^9.8.4",
+    "@sap/cds-dk": "^9.8.2",
     "@sap/eslint-plugin-cds": "^4",
-    "eslint": "^9",
+    "eslint": "^10",
     "mbt": "^1.2.34",
     "typedoc": "^0.25.0"
   },
-  
-"engines": {
+  "engines": {
     "node": "^22"
   },
   "scripts": {
-    "start": "cds-serve --port ${PORT} --profile production",
+    "start": "cds-serve --profile hybrid",
     "docs": "typedoc --entryPoint srv/*.js --out docs/api"
   },
   "private": true,
