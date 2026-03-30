@@ -8,9 +8,10 @@ export default cds.service.impl(async function () {
    * um Tunnel, Location ID, Auth und Basis-Erreichbarkeit zu prüfen.
    */
   this.on('PingOnPrem', async (req) => {
+    const destinationName = process.env.ENAIO_DESTINATION_NAME || 'enaio-test';
     try {
       const destination = await getDestination({
-        destinationName: 'enaio-test',
+        destinationName,
         useCache: false
       });
 
@@ -53,36 +54,71 @@ export default cds.service.impl(async function () {
    * egal ob die Destination-Base-URL bereits /osrest/api enthält oder nicht.
    */
   this.on('ServiceInfo', async (req) => {
-    try {
-      const destination = await getDestination({
-        destinationName: 'enaio-test',
-        useCache: false
-      });
+  try {
+    const destination = await getDestination({
+      destinationName: 'enaio-test',
+      useCache: false
+    });
 
-      if (!destination) return req.error(502, 'Destination not found');
+    if (!destination) return req.error(502, 'Destination not found');
 
-      const base = (destination.url || '').replace(/\/+$/, '');
-      // Auto-Suffix: Wenn Base schon /osrest/api ist -> /serviceinfo, sonst kompletter Pfad
-      const suffix = base.endsWith('/osrest/api') ? '/serviceinfo' : '/osrest/api/serviceinfo';
+    const base = (destination.url || '').replace(/\/+$/, '');
+    const suffix = base.endsWith('/osrest/api') ? '/serviceinfo' : '/osrest/api/serviceinfo';
 
-      req.warn(`ServiceInfo -> base: ${base}, url: ${suffix}, auth: ${destination.authentication}, proxy: ${destination.proxyConfiguration?.proxyType}, locationId: ${destination.proxyConfiguration?.headers?.['SAP-Connectivity-SCC-Location_ID']}`);
+    // Location ID aus der Destination auslesen und in Headers setzen
+    const locationId = destination.cloudConnectorLocationId || 'azure-dev-qual';
+    
+    const headers = {
+      Accept: 'application/json',
+      Connection: 'close',
+      'SAP-Connectivity-SCC-Location_ID': locationId  // ← Das fehlt!
+    };
 
-      const response = await executeHttpRequest(destination, {
-        method: 'get',
-        url: suffix,
-        headers: { Accept: 'application/json' }
-      });
+    req.warn(`ServiceInfo -> base: ${base}, url: ${suffix}, locationId: ${locationId}`);
 
-      return JSON.stringify(response.data);
+    const response = await executeHttpRequest(destination, {
+      method: 'get',
+      url: suffix,
+      headers: headers,
+      timeout: 30000
+    });
 
-    } catch (e) {
-      console.error('status:', e.statusCode, e.message)
-      console.error('rootCause:', e?.rootCause?.message || e?.cause?.message)
-      if (e.response) {
-        console.error('resp headers:', e.response.headers)
-        console.error('resp data:', e.response.data) // <- hier steht oft die CC/Proxy-Fehlermeldung
-      }
-      throw e
+    return JSON.stringify(response.data);
+
+  } catch (e) {
+    req.error(`Error: ${e.message}, Code: ${e.code}`);
+    if (e.response) {
+      req.error(`Response status: ${e.response.status}, data: ${JSON.stringify(e.response.data)}`);
     }
-  });
+    throw e;
+  }
+});
+
+
+  // Custom GET endpoint (kein OData)
+  this.on('READ', 'DebugDestination', async (req) => {
+  try {
+    const destination = await getDestination({
+      destinationName: 'enaio-test',
+      useCache: false
+    });
+
+    // Passwort ausblenden
+    const safeDestination = { ...destination };
+    if (safeDestination.password) safeDestination.password = '[HIDDEN]';
+    if (safeDestination.headers?.authorization) safeDestination.headers.authorization = '[HIDDEN]';
+
+    console.log('=== RAW DESTINATION ===');
+    console.log(JSON.stringify(safeDestination, null, 2));
+
+    return [{
+      raw: JSON.stringify(safeDestination, null, 2)
+    }];
+    
+  } catch (e) {
+    return req.error(500, e.message);
+  }
+});
+
+
 });

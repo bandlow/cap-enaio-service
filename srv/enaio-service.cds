@@ -2,7 +2,6 @@ using {cuid} from '@sap/cds/common';
 
 
 service EnaioService {
-
   @restrict: [{
     grant: ['READ'],
     to   : 'Display'
@@ -15,4 +14,9 @@ service EnaioService {
 
   /// Liefert die Antwort von /osrest/api/serviceinfo als String (rohe JSON-Payload)
   function ServiceInfo() returns String;
+
+ entity DebugDestination {
+  key name: String;
+  raw: LargeString;  // Für komplettes JSON
+}
 }

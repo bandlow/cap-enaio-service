@@ -19,14 +19,14 @@ modules:
     type: nodejs
     path: gen/srv
     properties:
-      # IDProve Credentials - direkte Werte (überschreibbar via mtaext)
-      ENAIO_DESTINATION: "enaio-test"
+      #direkte Werte (überschreibbar via mtaext)
+      ENAIO_DESTINATION_NAME: "enaio-test"
       # CDS Logging
       CDS_LOG_LEVEL: "debug"
       CDS_LOG_LEVELS_ENAIO_SERVICE: "debug"   # enaio-service → ENAIO_SERVICE
     parameters:
       buildpack: nodejs_buildpack
-      memory: 128M
+      memory: 64M
     build-parameters:
       builder: npm-ci
       ignore:

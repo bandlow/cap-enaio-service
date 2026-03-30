@@ -21,7 +21,7 @@
   },
   
 "engines": {
-    "node": "^20"
+    "node": "^22"
   },
   "scripts": {
     "start": "cds-serve --port ${PORT} --profile production",
